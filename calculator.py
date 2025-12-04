@@ -22,3 +22,6 @@ class Calculator:
         return math.pow(x, y)
 
 
+# calcular = Calculator()
+# resultado = calcular.add(100, 100)
+# print(resultado)
