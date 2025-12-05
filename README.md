@@ -139,3 +139,35 @@ Se a calculadora for usada na interface Tkinter, basta chamar:
 ```python
 resultado = calc.add(2, 3)
 ```
+----------------------------------------------------------------
+# Controller - Visão Geral
+
+O ``Controller`` é a ponte entre:
+- a interface gráfica (``ui``)
+- a calculador de verdade(``Calculator``)
+
+Ele recebe:
+- qual operação o usuário escolheu (``op``)
+- os valores digitados (``x`` e ``y``)
+- e decide qual função da calculadora deve chamar
+----------------------------------------------------------------
+### 🧱 Construção do Controller
+
+```python
+def __init__(self, ui):
+    self.calc = Calculator()
+    self.ui = ui
+```
+
+✅ O Controller cria uma instância da calculadora real: 
+``self.calc = Calculator()``
+
+Assim, ele pode chamar métodos como: 
+
+- ``self.calc.add()``
+- ``self.calc.division()``
+- ``self.calc.square_root()``
+- etc.
+
+✅ Ele também guarda a interface (``ui``), caso precise atualizar o display.
+----------------------------------------------------------------
