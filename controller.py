@@ -1,6 +1,6 @@
 from calculator import Calculator
 
-class COntroller:
+class Controller:
     def __init__(self, ui):
         self.calc = Calculator()
         self.ui = ui 
@@ -13,7 +13,7 @@ class COntroller:
                 return self.calc.add(x, y)
             elif op == "-":
                 return self.calc.substract(x, y)
-            elif op == "x":
+            elif op == "x" or op == "×" or op == "*":
                 return self.calc.multiply(x, y)
             elif op == "÷":
                 return self.calc.division(x, y)
