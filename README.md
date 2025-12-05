@@ -139,6 +139,16 @@ Se a calculadora for usada na interface Tkinter, basta chamar:
 ```python
 resultado = calc.add(2, 3)
 ```
+
+## 🎯 Resumo da lógica
+
+Em poucas frases:
+
+>A classe ``Calculator`` é um objeto que centraliza todas as operações matemáticas.
+>Cada método representa uma função matemática específica.
+>O método recebe entradas (``x, y``) e devolve um resultado.
+>``math`` é usado para operações mais precisas e avançadas.
+
 ----------------------------------------------------------------
 # Controller - Visão Geral
 
@@ -169,5 +179,76 @@ Assim, ele pode chamar métodos como:
 - ``self.calc.square_root()``
 - etc.
 
-✅ Ele também guarda a interface (``ui``), caso precise atualizar o display.
+✅Ele também guarda a interface (``ui``), caso precise atualizar o display.
 ----------------------------------------------------------------
+### Método de Processamento de Operações
+
+```python
+def process_operation(self, op, x, y=None):
+```
+
+Quando a ``ui`` manda algo:
+
+- operação:``+``
+- valor1: ``10``
+- valor2: ``5``
+
+O controller recebe esses dados nele, e ``y=None``, deixa claro que **algumas operações só usam o elemento ``x``**(radiciação por exemplo).
+--------------------------------------------------------------------
+
+### Convertendo strings para números reais
+
+```python 
+x = float(x)
+if y is not None:
+    y = float(y)
+```
+
+Quando os valores vem da interface, eles vem como ``string`` e a função acima, os transforma de ``string`` para ``float``  o que permite que o calculo seja efetuado. 
+
+Exemplo: 
+
+- "10" => 10.0
+- "4.7" => 4.7
+
+Por isso a conversão é obrigatória. Se caso o usuario informar uma letra por exemplo, é mostrado o ``ValueError``, que no final será tratado.
+
+### O “switch-case manual” das operações
+
+Python não tem ``switch-case``, então usamos ``if / elif``.
+
+```python
+if op == "+":
+    return self.calc.add(x, y)
+```
+
+O significado:
+
+> “Se a operação recebida é +, chame o método de soma da classe Calculator.”
+
+Assim para cada operação.
+
+### Tratamento de erros
+
+```python
+except ValueError:
+    return "Erro"
+```
+Se ocorrer qualquer erro de conversão:
+
+- ``float("abc")``
+
+- divisão inválida
+
+- raiz de número negativo (em alguns casos)
+
+o controller retorna "Erro" para a interface mostrar no display.
+
+------------------------------------------
+
+## 🎯 RESUMÃO DA LÓGICA
+
+>O Controller recebe dados da UI, transforma esses dados, decide qual cálculo deve ser feito, chama o método correto da classe Calculator e retorna o resultado.
+>Se qualquer coisa der errado, devolve "Erro".
+
+Ele é literalmente o cérebro que traduz comandos da interface em cálculos reais.
